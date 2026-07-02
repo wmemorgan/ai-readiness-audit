@@ -9,7 +9,7 @@ All notable changes to this project are documented here. The format follows
 ### Added
 
 - The AI-Readiness Standard: a deterministic, questionnaire-driven readiness diagnostic scoring an
-  organization across seven examination-derived dimensions on a five-level scale (L1–L5).
+  organization across seven governance dimensions on a five-level scale (L1–L5).
 - Deterministic scoring core (pure domain), with a locked, inspectable scoring contract and explicit
   band cut-lines.
 - Banded self-assessment question set covering every dimension.
@@ -22,5 +22,14 @@ All notable changes to this project are documented here. The format follows
 - Command-line interface (`ai-readiness-audit`) with `demo` and `assess` commands.
 - Clean Architecture (hexagonal ports and adapters) enforced by an import contract, plus lint, strict
   typing, tests, an IP firewall scan, and an acceptance-criteria eval gate.
+
+### Standards lineage
+
+- The seven dimensions are anchored to the **ISO/IEC 42001** management-system family as the primary
+  structural lineage, with **NIST AI RMF** functions (GOVERN / MAP / MEASURE / MANAGE) and the
+  Generative AI Profile providing per-dimension functional alignment and risk vocabulary. The
+  **FFIEC IT Examination Handbook Work Program** is retained as *method inspiration* (tiered
+  objectives → procedures → evidence), cited in the report footer and README only. The L1–L5 bands
+  remain this standard's own authored contribution; the referenced standards do not define them.
 
 [0.1.0]: https://github.com/wmemorgan/ai-readiness-audit/releases/tag/v0.1.0

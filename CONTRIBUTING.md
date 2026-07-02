@@ -27,8 +27,9 @@ python eval/SPEC-2026-0701/gate.py  # acceptance gate (AC-1..AC-15)
   layer. Scoring is deterministic; keep it that way — the import contract enforces this.
 - **Scoring is deterministic; narration never scores.** The optional LLM narration feature may
   summarize a finished report but must never influence a band.
-- **The rubric is a locked contract.** Changing the seven dimensions, their examination lineage,
-  or the five bands is a deliberate versioned change, not a casual edit.
+- **The rubric is a locked contract.** Changing the seven dimensions, their standards lineage
+  (ISO/IEC 42001 domains and NIST AI RMF functions), or the five bands is a deliberate versioned
+  change, not a casual edit.
 - **Answers, not artifacts.** This tool ingests questionnaire answers only. Do not add document
   upload or parsing.
 

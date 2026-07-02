@@ -14,6 +14,6 @@ criteria:
   AC-10: { check: ac_10_locked_contract, layer: Layer-A }
   AC-11: { check: ac_11_narration_never_scores, layer: B-mech }
   AC-12: { check: ac_12_routing_cta, layer: Layer-A }
-  AC-13: { check: ac_13_ffiec_defensibility, layer: Layer-A }
+  AC-13: { check: ac_13_standards_alignment, layer: Layer-A }
   AC-14: { check: ac_14_minimal_privacy_surface, layer: Layer-A }
   AC-15: { check: ac_15_gate3_signoff, layer: Layer-A }

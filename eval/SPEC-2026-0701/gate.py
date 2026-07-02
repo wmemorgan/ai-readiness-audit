@@ -79,10 +79,12 @@ def ac_6_ip_grep() -> None:
 def ac_7_standard_foreground() -> None:
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
     assert "AI-Readiness Standard" in readme
-    cite_at = min(readme.find("Built on"), readme.find("Cites"))
-    assert cite_at != -1
-    for name in ("FFIEC", "NIST"):
-        assert readme.find(name) > cite_at
+    # ISO/IEC and NIST may appear in product language and per-dimension lineage.
+    assert "ISO/IEC 42001" in readme and "NIST AI RMF" in readme
+    # FFIEC may appear only from the Standards Lineage / Built on section onward.
+    lineage_at = min(i for i in (readme.find("Standards Lineage"), readme.find("Built on")) if i != -1)
+    ffiec_at = readme.find("FFIEC")
+    assert ffiec_at != -1 and ffiec_at >= lineage_at, "FFIEC may appear only as a citation"
 
 
 def ac_8_uncertainty_forward() -> None:
@@ -126,9 +128,27 @@ def ac_12_routing_cta() -> None:
     assert "certified" not in HtmlReportRenderer().render(report).lower()
 
 
-def ac_13_ffiec_defensibility() -> None:
+def ac_13_standards_alignment() -> None:
+    # Every dimension carries a non-empty ISO lineage and NIST function matching Table R.
+    table_r = {
+        "governance_decision_rights": (
+            "ISO/IEC 42001 Cl. 5 (Leadership) + ISO/IEC 38507 (AI governance)", "GOVERN"),
+        "risk_control_posture": (
+            "ISO/IEC 23894 (AI risk mgmt) + ISO/IEC 42001 Cl. 6 (Planning)", "MAP + MANAGE"),
+        "data_readiness": (
+            "ISO/IEC 42001 Annex A (Data for AI) + ISO/IEC 5259 (data quality)", "MAP"),
+        "security_privacy": (
+            "ISO/IEC 27001 (ISMS) + ISO/IEC 27701 (Privacy)", "MANAGE (GenAI Profile risk themes)"),
+        "talent_operating_model": (
+            "ISO/IEC 42001 Cl. 7 (Support — competence & awareness)", "GOVERN"),
+        "third_party_concentration_risk": (
+            "ISO/IEC 42001 Annex A (Suppliers) + ISO/IEC 27036 (supplier sec.)", "GOVERN + MANAGE"),
+        "measurement_assurance": (
+            "ISO/IEC 42001 Cl. 9 (Performance eval) + ISO/IEC 42005 (impact)", "MEASURE"),
+    }
     for dim in DIMENSIONS:
-        assert dim.ffiec_domain, f"{dim.key} missing FFIEC lineage"
+        assert dim.iso_lineage.strip() and dim.nist_function.strip(), f"{dim.key} missing lineage"
+        assert (dim.iso_lineage, dim.nist_function) == table_r[dim.key], f"{dim.key} lineage drift"
 
 
 def ac_14_minimal_privacy_surface() -> None:
@@ -155,13 +175,13 @@ CHECKS: dict[str, tuple[str, Callable[[], None]]] = {
     "AC-4": ("Prioritized remediation — governance + measurement first", ac_4_prioritized_remediation),
     "AC-5": ("Demo mode renders the full report on the sample org, no input", ac_5_demo_mode),
     "AC-6": ("Gate-1 grep — zero prohibited terms / authorship traces", ac_6_ip_grep),
-    "AC-7": ("Authored Standard foregrounded; canon as citations only", ac_7_standard_foreground),
+    "AC-7": ("Authored Standard foregrounded; ISO/NIST inform it; FFIEC cited only", ac_7_standard_foreground),
     "AC-8": ("Uncertainty-forward report — advisory above the fold", ac_8_uncertainty_forward),
     "AC-9": ("Encoded rubric equals the ratified §4 lock", ac_9_rubric_lock),
     "AC-10": ("Locked, reproducible scoring contract; no nondeterministic input", ac_10_locked_contract),
     "AC-11": ("LLM narration never moves a band; disabled by default", ac_11_narration_never_scores),
     "AC-12": ("Routing CTA present, gap-framed, never 'certified'", ac_12_routing_cta),
-    "AC-13": ("FFIEC-defensibility — every dimension carries its domain", ac_13_ffiec_defensibility),
+    "AC-13": ("Standards-alignment defensibility — ISO lineage + NIST function per Table R", ac_13_standards_alignment),
     "AC-14": ("Minimal privacy surface — questionnaire-only, no upload path", ac_14_minimal_privacy_surface),
     "AC-15": ("SDS Gate-3 layout sign-off recorded", ac_15_gate3_signoff),
 }

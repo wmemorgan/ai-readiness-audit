@@ -2,6 +2,9 @@
 
 Each question belongs to exactly one locked dimension and offers five options, one per
 band (L1..L5). The tool ingests answers to these questions — never documents or artifacts.
+
+Question language traces to the core question of its dimension, aligned to ISO/IEC 42001
+domains and NIST AI RMF / GenAI Profile risk vocabulary.
 """
 
 from __future__ import annotations

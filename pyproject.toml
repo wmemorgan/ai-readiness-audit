@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ai-readiness-audit"
 version = "0.1.0"
-description = "A regulator-grade, FFIEC-derived AI-readiness diagnostic: score your organization across seven governance dimensions (L1–L5) and get a prioritized readiness report. Deterministic, open-source."
+description = "A deterministic AI-readiness diagnostic aligned to ISO/IEC 42001 domains and NIST AI RMF functions"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

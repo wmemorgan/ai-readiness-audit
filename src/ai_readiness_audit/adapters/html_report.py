@@ -1,19 +1,26 @@
 """HTML renderer for a ReadinessReport.
 
 The rendered report leads with the authored AI-Readiness Standard and the advisory notice
-(uncertainty-forward, above the fold). The public frameworks the standard rests on appear
-only as citations in a footer — never as the headline.
+(uncertainty-forward, above the fold). Each dimension shows its ISO/IEC lineage and NIST AI RMF
+function. The public standards the standard rests on appear only as citations in a footer.
 """
 
 from __future__ import annotations
 
 from html import escape
 
+from ..domain.copy import STANDARD_HEADLINE, STANDARD_SUBTITLE, lineage_line
 from ..domain.models import DimensionResult, ReadinessReport
-from ..domain.rubric import CITED_FRAMEWORKS
 
-STANDARD_HEADLINE = "The AI-Readiness Standard"
-STANDARD_TAGLINE = "Seven dimensions. Five levels. One honest picture of where you stand."
+# Built on / Cites — the public standards the AI-Readiness Standard rests on. This footer is the
+# only place a report reproduces the citation list; FFIEC appears here as method inspiration only.
+CITATIONS: tuple[str, ...] = (
+    "ISO/IEC 42001:2023 — AI management systems (iso.org/standard/42001)",
+    "ISO/IEC 23894, 38507, 42005, 27001, 27701, 5259 series, 27036",
+    "NIST AI RMF 1.0 (AI 100-1) + Generative AI Profile (AI 600-1)",
+    "FFIEC IT Examination Handbook Work Program — method inspiration "
+    "(tiered objectives → procedures → evidence, by domain)",
+)
 
 
 class HtmlReportRenderer:
@@ -47,7 +54,7 @@ class HtmlReportRenderer:
         return (
             "<header>"
             f"<h1>{escape(STANDARD_HEADLINE)}</h1>"
-            f"<p>{escape(STANDARD_TAGLINE)}</p>"
+            f"<p>{escape(STANDARD_SUBTITLE)}</p>"
             "</header>"
         )
 
@@ -72,7 +79,7 @@ class HtmlReportRenderer:
             rows.append(
                 "<li>"
                 f"<h3>{escape(dim.name)} — {escape(result.band.title)} ({result.band.name})</h3>"
-                f'<p class="ffiec">Examination lineage: {escape(dim.ffiec_domain)}</p>'
+                f'<p class="lineage">{escape(lineage_line(dim, result.score))}</p>'
                 + self._dimension_gaps(result)
                 + "</li>"
             )
@@ -106,11 +113,11 @@ class HtmlReportRenderer:
         return f'<section class="cta"><p>{escape(report.routing_cta)}</p></section>'
 
     def _citations(self) -> str:
-        items = "".join(f"<li>{escape(name)}</li>" for name in CITED_FRAMEWORKS)
+        items = "".join(f"<li>{escape(name)}</li>" for name in CITATIONS)
         return (
             "<footer>"
             "<h2>Built on / Cites</h2>"
-            "<p>The standard rests on these public frameworks:</p>"
+            "<p>The standard rests on these public standards and frameworks:</p>"
             f"<ul>{items}</ul>"
             "</footer>"
         )

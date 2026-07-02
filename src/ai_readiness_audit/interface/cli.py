@@ -19,6 +19,7 @@ from ..adapters.narration import build_narration_provider
 from ..adapters.pdf_report import PdfReportRenderer
 from ..application.assess import assess
 from ..config import Settings
+from ..domain.copy import TAGLINE, lineage_line
 from ..domain.models import Band, ReadinessReport
 from .sample_org import sample_answers
 
@@ -37,10 +38,9 @@ def _text_report(report: ReadinessReport) -> str:
         "",
         "By dimension:",
     ]
-    lines += [
-        f"  - {r.dimension.name}: {r.band.title} ({r.band.name})"
-        for r in report.dimension_results
-    ]
+    for r in report.dimension_results:
+        lines.append(f"  - {r.dimension.name}: {r.band.title} ({r.band.name})")
+        lines.append(f"    {lineage_line(r.dimension, r.score)}")
     lines += ["", "Prioritized remediation:"]
     lines += [
         f"  {i}. {g.dimension_name}: {g.prompt}"
@@ -78,7 +78,7 @@ def _run(answers: Mapping[str, Band], args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="ai-readiness-audit", description=__doc__)
+    parser = argparse.ArgumentParser(prog="ai-readiness-audit", description=TAGLINE)
     parser.add_argument("--format", choices=["text", "html", "pdf"], default="text")
     parser.add_argument("--out", default=None, help="write to a file instead of stdout")
     parser.add_argument(

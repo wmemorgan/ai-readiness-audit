@@ -7,6 +7,7 @@ deployment may swap in a richer branded PDF adapter behind the same port.
 
 from __future__ import annotations
 
+from ..domain.copy import lineage_line
 from ..domain.models import ReadinessReport
 
 
@@ -30,6 +31,7 @@ def _report_lines(report: ReadinessReport) -> list[str]:
     ]
     for result in report.dimension_results:
         lines.append(f"  - {result.dimension.name}: {result.band.title} ({result.band.name})")
+        lines.append(f"    {lineage_line(result.dimension, result.score)}")
     lines.append("")
     lines.append("Prioritized remediation:")
     for index, gap in enumerate(report.prioritized_remediation, start=1):

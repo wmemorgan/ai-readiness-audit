@@ -18,7 +18,7 @@ from .models import (
 )
 from .questions import QUESTIONS, questions_for
 from .remediation import gaps_for_dimension, prioritized_remediation
-from .rubric import CITED_FRAMEWORKS, DIMENSIONS
+from .rubric import DIMENSIONS
 from .scoring import (
     DEFAULT_CONTRACT,
     ScoringContract,
@@ -31,7 +31,6 @@ from .scoring import (
 __all__ = [
     "AnswerOption",
     "Band",
-    "CITED_FRAMEWORKS",
     "DEFAULT_CONTRACT",
     "DIMENSIONS",
     "Dimension",

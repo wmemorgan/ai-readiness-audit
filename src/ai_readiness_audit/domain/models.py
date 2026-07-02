@@ -51,11 +51,12 @@ _BAND_SUMMARIES: dict[Band, str] = {
 
 @dataclass(frozen=True)
 class Dimension:
-    """One readiness dimension, mapped to the public examination domain it rests on."""
+    """One readiness dimension, traced to its ISO/IEC lineage and its NIST AI RMF function."""
 
     key: str
     name: str
-    ffiec_domain: str
+    iso_lineage: str
+    nist_function: str
     core_question: str
 
 

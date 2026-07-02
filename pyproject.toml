@@ -52,7 +52,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 [tool.ruff.lint.per-file-ignores]
 # The standalone eval gate adjusts sys.path before importing (E402) and keeps one-line
 # acceptance-criterion descriptions readable (E501).
-"eval/SPEC-2026-0701/gate.py" = ["E402", "E501"]
+"eval/acceptance/gate.py" = ["E402", "E501"]
 # The contract generator adds the src path before importing the engine (E402) and keeps some
 # generated rule descriptions on one line (E501).
 "scripts/generate_contract.py" = ["E402", "E501"]

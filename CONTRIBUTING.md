@@ -18,7 +18,7 @@ mypy                              # types (strict)
 lint-imports                      # Clean Architecture dependency contract
 bash scripts/ip_grep.sh           # IP firewall
 pytest                            # tests
-python eval/SPEC-2026-0701/gate.py  # acceptance gate (AC-1..AC-15)
+python eval/acceptance/gate.py  # acceptance gate (AC-1..AC-15)
 ```
 
 ## Design rules

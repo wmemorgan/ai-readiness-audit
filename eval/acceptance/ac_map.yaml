@@ -1,6 +1,6 @@
-# SPEC-2026-0701 — acceptance criterion -> check map.
+# Acceptance criterion -> check map.
 # The gate (gate.py) executes each check; `gate.py --coverage` prints this mapping.
-spec_id: SPEC-2026-0701-ai-readiness-audit
+id: ai-readiness-audit
 criteria:
   AC-1: { check: ac_1_determinism, layer: B-mech }
   AC-2: { check: ac_2_band_boundaries, layer: B-mech }

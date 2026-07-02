@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Eval gate for SPEC-2026-0701 — the built tool must satisfy every acceptance criterion.
+"""Acceptance eval gate — the built tool must satisfy every acceptance criterion.
 
-Run ``python eval/SPEC-2026-0701/gate.py`` to prove the tool against AC-1..AC-15, or
+Run ``python eval/acceptance/gate.py`` to prove the tool against AC-1..AC-15, or
 ``--coverage`` to print the AC -> check map. Exit 0 iff every mapped criterion passes.
 This is the authoritative completion proof (the spec becomes the eval).
 """
@@ -188,7 +188,7 @@ CHECKS: dict[str, tuple[str, Callable[[], None]]] = {
 
 
 def print_coverage() -> int:
-    print(f"SPEC-2026-0701 eval gate — {len(CHECKS)} acceptance criteria mapped:")
+    print(f"Acceptance eval gate — {len(CHECKS)} acceptance criteria mapped:")
     for ac, (desc, _) in CHECKS.items():
         print(f"  {ac}: {desc}")
     return 0

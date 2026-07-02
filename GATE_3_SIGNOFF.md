@@ -14,6 +14,6 @@ constitutes this sign-off.
 
 - [ ] The Readiness Report layout and presentation are approved.
 - [ ] Gate-1 (`ip_grep`) and Gate-2 (structural review) are green.
-- [ ] The `eval/SPEC-2026-0701/gate.py` gate is green (all AC-1..AC-15).
+- [ ] The `eval/acceptance/gate.py` gate is green (all AC-1..AC-15).
 - [ ] Decision to flip the repository from private to public.
 - [ ] Decision to publish the `v0.1.0` release.

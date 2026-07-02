@@ -5,7 +5,7 @@ from __future__ import annotations
 from ai_readiness_audit.domain.models import Band
 from ai_readiness_audit.domain.rubric import DIMENSIONS
 
-# The ratified lock (SPEC-2026-0701 Table R): key -> (name, iso_lineage, nist_function).
+# The ratified rubric lock (Table R): key -> (name, iso_lineage, nist_function).
 LOCKED: dict[str, tuple[str, str, str]] = {
     "governance_decision_rights": (
         "Governance & Decision Rights",

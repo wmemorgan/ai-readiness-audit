@@ -35,5 +35,5 @@ jobs:
         run: bash scripts/ip_grep.sh
       - name: Tests
         run: python -m pytest
-      - name: Eval gate (SPEC-2026-0701 — AC-1..AC-15)
-        run: python eval/SPEC-2026-0701/gate.py
+      - name: Eval gate (acceptance criteria AC-1..AC-15)
+        run: python eval/acceptance/gate.py

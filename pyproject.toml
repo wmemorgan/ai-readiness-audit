@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-readiness-audit"
+version = "0.1.0"
+description = "A regulator-grade, FFIEC-derived AI-readiness diagnostic: score your organization across seven governance dimensions (L1–L5) and get a prioritized readiness report. Deterministic, open-source."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Wilfred Morgan" }]
+keywords = ["ai-readiness", "ai-governance", "ai-risk-management", "responsible-ai", "assessment", "maturity-model"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+claude = ["anthropic>=0.39"]
+openai = ["openai>=1.40"]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11", "import-linter>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/wmemorgan/ai-readiness-audit"
+Issues = "https://github.com/wmemorgan/ai-readiness-audit/issues"
+
+[project.scripts]
+ai-readiness-audit = "ai_readiness_audit.interface.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ai_readiness_audit = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# The standalone eval gate adjusts sys.path before importing (E402) and keeps one-line
+# acceptance-criterion descriptions readable (E501).
+"eval/SPEC-2026-0701/gate.py" = ["E402", "E501"]
+
+[tool.mypy]
+python_version = "3.10"
+packages = ["ai_readiness_audit"]
+strict = true
+warn_unused_ignores = false
+
+[[tool.mypy.overrides]]
+module = ["anthropic", "openai"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src"]

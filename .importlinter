@@ -1,0 +1,32 @@
+[importlinter]
+root_package = ai_readiness_audit
+
+[importlinter:contract:layers]
+name = Clean Architecture layers point inward only
+type = layers
+layers =
+    ai_readiness_audit.interface
+    ai_readiness_audit.adapters
+    ai_readiness_audit.application
+    ai_readiness_audit.domain
+
+[importlinter:contract:pure-domain]
+name = The domain core is pure (imports no outer layer)
+type = forbidden
+source_modules =
+    ai_readiness_audit.domain
+forbidden_modules =
+    ai_readiness_audit.application
+    ai_readiness_audit.adapters
+    ai_readiness_audit.interface
+    ai_readiness_audit.config
+
+[importlinter:contract:narration-never-scores]
+name = Narration cannot reach the scoring core
+type = forbidden
+source_modules =
+    ai_readiness_audit.adapters.narration
+forbidden_modules =
+    ai_readiness_audit.domain.scoring
+    ai_readiness_audit.domain.remediation
+    ai_readiness_audit.application.assess

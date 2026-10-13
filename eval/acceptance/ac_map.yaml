@@ -1,0 +1,17 @@
+# Acceptance check -> implementation map.
+# The gate (gate.py) executes each check; `gate.py --coverage` prints this mapping.
+id: ai-readiness-audit
+criteria:
+  Check 1: { check: ac_1_determinism }
+  Check 2: { check: ac_2_band_boundaries }
+  Check 3: { check: ac_3_renders_all_dimensions }
+  Check 4: { check: ac_4_prioritized_remediation }
+  Check 5: { check: ac_5_demo_mode }
+  Check 6: { check: ac_7_standard_foreground }
+  Check 7: { check: ac_8_uncertainty_forward }
+  Check 8: { check: ac_9_rubric_lock }
+  Check 9: { check: ac_10_locked_contract }
+  Check 10: { check: ac_11_narration_never_scores }
+  Check 11: { check: ac_12_routing_cta }
+  Check 12: { check: ac_13_standards_alignment }
+  Check 13: { check: ac_14_minimal_privacy_surface }

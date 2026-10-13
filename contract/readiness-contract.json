@@ -1,0 +1,415 @@
+{
+  "version": "1.0",
+  "engine_version": "0.1.0",
+  "engine_commit": "a640ed6",
+  "generated_at": "2026-07-02",
+  "generated_from": "the ai-readiness-audit Python engine (exact strings; do not paraphrase)",
+  "levels": [
+    {
+      "level": 1,
+      "code": "L1",
+      "name": "Ad hoc",
+      "summary": "No policy, no owner, no named risks; experimentation without structure."
+    },
+    {
+      "level": 2,
+      "code": "L2",
+      "name": "Emerging",
+      "summary": "Pockets of activity; informal ownership; risks unnamed."
+    },
+    {
+      "level": 3,
+      "code": "L3",
+      "name": "Defined",
+      "summary": "Policy and an accountable owner exist; risks named; basic controls; repeatable."
+    },
+    {
+      "level": 4,
+      "code": "L4",
+      "name": "Governed",
+      "summary": "Controls tested; measurement in place; data governed; human-in-loop by severity."
+    },
+    {
+      "level": 5,
+      "code": "L5",
+      "name": "Optimized",
+      "summary": "Continuous assurance; severity-weighted evaluation; autonomous-ready governance."
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "governance_decision_rights",
+      "name": "Governance & Decision Rights",
+      "iso_lineage": "ISO/IEC 42001 Cl. 5 (Leadership) + ISO/IEC 38507 (AI governance)",
+      "nist_function": "GOVERN",
+      "core_question": "Is there an accountable executive, a written AI policy, and defined approval gates?",
+      "weight": 1.0,
+      "questions": [
+        {
+          "id": "gov-1",
+          "prompt": "Who is accountable for AI outcomes in your organization?",
+          "level_anchors": {
+            "1": "No one is accountable; use is unsanctioned.",
+            "2": "Informal — a champion advocates, but ownership is unassigned.",
+            "3": "A named executive owns AI, documented in role charters.",
+            "4": "A named owner plus a governing body that meets on a cadence.",
+            "5": "Board-level oversight with reporting and continuous accountability."
+          }
+        },
+        {
+          "id": "gov-2",
+          "prompt": "Is there a written AI policy governing acceptable use and approval?",
+          "level_anchors": {
+            "1": "No written policy of any kind.",
+            "2": "Scattered guidance; nothing authoritative.",
+            "3": "A documented AI policy exists and is communicated.",
+            "4": "Policy is enforced with defined approval gates by risk tier.",
+            "5": "Policy is versioned, audited, and continuously improved."
+          }
+        },
+        {
+          "id": "gov-3",
+          "prompt": "How are AI initiatives approved before they ship?",
+          "level_anchors": {
+            "1": "No approval step; anyone can deploy.",
+            "2": "Ad hoc sign-off, case by case.",
+            "3": "A defined intake and approval path exists.",
+            "4": "Approval gates scale with assessed risk and blast radius.",
+            "5": "Gated approvals with post-deployment review feeding the next gate."
+          }
+        }
+      ]
+    },
+    {
+      "id": "risk_control_posture",
+      "name": "Risk & Control Posture",
+      "iso_lineage": "ISO/IEC 23894 (AI risk mgmt) + ISO/IEC 42001 Cl. 6 (Planning)",
+      "nist_function": "MAP + MANAGE",
+      "core_question": "Are AI-specific risks — hallucination, data leakage, prompt injection, blast radius, drift — named and mapped to controls with human-in-loop gates by severity?",
+      "weight": 1.0,
+      "questions": [
+        {
+          "id": "risk-1",
+          "prompt": "Are AI-specific risks named (hallucination, leakage, injection, drift)?",
+          "level_anchors": {
+            "1": "Risks are not identified.",
+            "2": "A few risks are discussed informally.",
+            "3": "AI-specific risks are named and documented.",
+            "4": "Named risks are mapped to controls and owners.",
+            "5": "Risk register is live, severity-weighted, and reviewed on a cadence."
+          }
+        },
+        {
+          "id": "risk-2",
+          "prompt": "Is there a human-in-the-loop gate calibrated to severity?",
+          "level_anchors": {
+            "1": "No human review of AI output.",
+            "2": "Occasional spot checks, undefined.",
+            "3": "Human review is defined for sensitive use.",
+            "4": "Review depth scales with output severity.",
+            "5": "Severity-tiered review with escalation and audit trail."
+          }
+        },
+        {
+          "id": "risk-3",
+          "prompt": "How is model/output drift detected and contained?",
+          "level_anchors": {
+            "1": "Drift is neither defined nor monitored.",
+            "2": "Drift is understood as a concept only.",
+            "3": "Drift is monitored manually or periodically.",
+            "4": "Automated drift signals trigger defined responses.",
+            "5": "Continuous drift detection with rollback and containment runbooks."
+          }
+        }
+      ]
+    },
+    {
+      "id": "data_readiness",
+      "name": "Data Readiness",
+      "iso_lineage": "ISO/IEC 42001 Annex A (Data for AI) + ISO/IEC 5259 (data quality)",
+      "nist_function": "MAP",
+      "core_question": "Is data accessible, governed, quality-assured, lineage-traceable, and rights/licensing-cleared for AI use?",
+      "weight": 1.0,
+      "questions": [
+        {
+          "id": "data-1",
+          "prompt": "Is the data intended for AI accessible and inventoried?",
+          "level_anchors": {
+            "1": "Data location and ownership are unknown.",
+            "2": "Some sources are known but not catalogued.",
+            "3": "A data inventory exists for AI-relevant sources.",
+            "4": "Inventory includes lineage and access controls.",
+            "5": "Governed catalog with automated lineage and freshness."
+          }
+        },
+        {
+          "id": "data-2",
+          "prompt": "Is data quality assured for the data AI will consume?",
+          "level_anchors": {
+            "1": "Quality is unmeasured.",
+            "2": "Quality issues are handled reactively.",
+            "3": "Defined quality checks run before use.",
+            "4": "Quality gates block low-quality data automatically.",
+            "5": "Continuous quality monitoring with remediation SLAs."
+          }
+        },
+        {
+          "id": "data-3",
+          "prompt": "Are usage rights and licensing cleared for AI use of this data?",
+          "level_anchors": {
+            "1": "Rights have not been considered.",
+            "2": "Assumed acceptable; not verified.",
+            "3": "Rights are reviewed before AI use.",
+            "4": "Licensing is tracked per dataset with constraints enforced.",
+            "5": "Rights and licensing are continuously governed and auditable."
+          }
+        }
+      ]
+    },
+    {
+      "id": "security_privacy",
+      "name": "Security & Privacy",
+      "iso_lineage": "ISO/IEC 27001 (ISMS) + ISO/IEC 27701 (Privacy)",
+      "nist_function": "MANAGE (GenAI Profile risk themes)",
+      "core_question": "Are access controls, PII handling, model/data isolation, and third-party processing posture defined and disclosed?",
+      "weight": 1.0,
+      "questions": [
+        {
+          "id": "sec-1",
+          "prompt": "How is access to AI systems and their data controlled?",
+          "level_anchors": {
+            "1": "No access controls specific to AI.",
+            "2": "Shared credentials or broad access.",
+            "3": "Role-based access is defined.",
+            "4": "Least-privilege access with periodic review.",
+            "5": "Continuously enforced least privilege with just-in-time access."
+          }
+        },
+        {
+          "id": "sec-2",
+          "prompt": "How is PII handled in AI workflows?",
+          "level_anchors": {
+            "1": "PII exposure is not considered.",
+            "2": "Handled case by case, undocumented.",
+            "3": "PII handling rules are defined for AI use.",
+            "4": "PII is minimized, masked, or isolated by policy.",
+            "5": "Automated PII controls with monitoring and disclosure."
+          }
+        },
+        {
+          "id": "sec-3",
+          "prompt": "Is third-party model/data processing understood and disclosed?",
+          "level_anchors": {
+            "1": "Third-party processing is unknown.",
+            "2": "Known informally; not disclosed.",
+            "3": "Processing posture is documented.",
+            "4": "Contracts and disclosures cover third-party processing.",
+            "5": "Processing is governed, disclosed, and continuously verified."
+          }
+        }
+      ]
+    },
+    {
+      "id": "talent_operating_model",
+      "name": "Talent & Operating Model",
+      "iso_lineage": "ISO/IEC 42001 Cl. 7 (Support — competence & awareness)",
+      "nist_function": "GOVERN",
+      "core_question": "Are skills present or sourced, roles defined (build / operate / govern), and run-state ownership assigned?",
+      "weight": 1.0,
+      "questions": [
+        {
+          "id": "talent-1",
+          "prompt": "Are the skills to build and run AI present or sourced?",
+          "level_anchors": {
+            "1": "No relevant skills identified.",
+            "2": "A few individuals experiment.",
+            "3": "Required skills are identified and being sourced.",
+            "4": "Build/operate/govern roles are staffed.",
+            "5": "A sustained capability with succession and development."
+          }
+        },
+        {
+          "id": "talent-2",
+          "prompt": "Are build, operate, and govern responsibilities defined?",
+          "level_anchors": {
+            "1": "Responsibilities are undefined.",
+            "2": "Overlapping, informal responsibilities.",
+            "3": "Roles are defined on paper.",
+            "4": "Roles are staffed with clear handoffs.",
+            "5": "Operating model is measured and continuously improved."
+          }
+        },
+        {
+          "id": "talent-3",
+          "prompt": "Who owns an AI system once it is in production?",
+          "level_anchors": {
+            "1": "No run-state owner.",
+            "2": "Ownership is ambiguous after launch.",
+            "3": "A run-state owner is named.",
+            "4": "Owner has defined runbooks and on-call.",
+            "5": "Full lifecycle ownership with SLOs and review."
+          }
+        }
+      ]
+    },
+    {
+      "id": "third_party_concentration_risk",
+      "name": "Third-Party & Concentration Risk",
+      "iso_lineage": "ISO/IEC 42001 Annex A (Suppliers) + ISO/IEC 27036 (supplier sec.)",
+      "nist_function": "GOVERN + MANAGE",
+      "core_question": "Is model/vendor concentration understood, contractually controlled, and portable, with a bounded dependency blast radius?",
+      "weight": 1.0,
+      "questions": [
+        {
+          "id": "tp-1",
+          "prompt": "Is your model/vendor concentration understood?",
+          "level_anchors": {
+            "1": "Dependencies are not mapped.",
+            "2": "Aware of key vendors informally.",
+            "3": "Vendor and model dependencies are documented.",
+            "4": "Concentration risk is assessed and bounded.",
+            "5": "Concentration is continuously monitored with limits."
+          }
+        },
+        {
+          "id": "tp-2",
+          "prompt": "Are third-party AI dependencies contractually controlled?",
+          "level_anchors": {
+            "1": "No relevant contractual terms.",
+            "2": "Standard terms; nothing AI-specific.",
+            "3": "AI-specific terms exist in key contracts.",
+            "4": "Terms cover data use, exit, and liability.",
+            "5": "Contracts are governed with active risk management."
+          }
+        },
+        {
+          "id": "tp-3",
+          "prompt": "How portable are you off a given model or vendor?",
+          "level_anchors": {
+            "1": "Fully locked in; no exit path.",
+            "2": "Exit is possible but unplanned.",
+            "3": "A migration path is documented.",
+            "4": "Portability is tested periodically.",
+            "5": "Abstraction and drills keep switching cost bounded."
+          }
+        }
+      ]
+    },
+    {
+      "id": "measurement_assurance",
+      "name": "Measurement & Assurance",
+      "iso_lineage": "ISO/IEC 42001 Cl. 9 (Performance eval) + ISO/IEC 42005 (impact)",
+      "nist_function": "MEASURE",
+      "core_question": "Can you evaluate outputs? Is there an eval harness? Do you measure failure severity, test real scenarios, and evaluate the evaluation itself?",
+      "weight": 1.0,
+      "questions": [
+        {
+          "id": "meas-1",
+          "prompt": "Can you evaluate the quality of AI outputs?",
+          "level_anchors": {
+            "1": "Outputs are not evaluated.",
+            "2": "Evaluated by impression, ad hoc.",
+            "3": "Defined evaluation criteria exist.",
+            "4": "An eval harness runs against real scenarios.",
+            "5": "Evaluation is continuous and severity-weighted."
+          }
+        },
+        {
+          "id": "meas-2",
+          "prompt": "Do you measure the severity of failures, not just their rate?",
+          "level_anchors": {
+            "1": "Failures are not measured.",
+            "2": "Failure counts only, no severity.",
+            "3": "Severity is assessed after incidents.",
+            "4": "Severity is built into the evaluation.",
+            "5": "Severity-weighted metrics drive control changes."
+          }
+        },
+        {
+          "id": "meas-3",
+          "prompt": "Do you evaluate the evaluation itself for blind spots?",
+          "level_anchors": {
+            "1": "The evaluation is not examined.",
+            "2": "Assumed adequate.",
+            "3": "Periodic review of eval coverage.",
+            "4": "Eval coverage gaps are tracked and closed.",
+            "5": "Meta-evaluation is continuous and audited."
+          }
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "question_weight": 1.0,
+    "dimension_weights": {
+      "governance_decision_rights": 1.0,
+      "risk_control_posture": 1.0,
+      "data_readiness": 1.0,
+      "security_privacy": 1.0,
+      "talent_operating_model": 1.0,
+      "third_party_concentration_risk": 1.0,
+      "measurement_assurance": 1.0
+    },
+    "dimension_score_rule": "Arithmetic mean of the answered question levels within the dimension (each weighted by question_weight; uniform).",
+    "overall_score_rule": "Weighted mean of the seven dimension scores (each weighted by its dimension weight; uniform).",
+    "band_cut_lines": [
+      {
+        "min_score": 4.5,
+        "level": 5
+      },
+      {
+        "min_score": 3.5,
+        "level": 4
+      },
+      {
+        "min_score": 2.5,
+        "level": 3
+      },
+      {
+        "min_score": 1.5,
+        "level": 2
+      },
+      {
+        "min_score": 1.0,
+        "level": 1
+      }
+    ],
+    "band_rule": "Assign the highest level whose min_score <= score. Scores range 1.0..5.0.",
+    "gap_rule": {
+      "is_gap_when_level_at_or_below": 3,
+      "severity": "5 - level",
+      "max_gaps_per_dimension": 3,
+      "per_dimension_sort": "severity desc, then question_id asc; take the top N per dimension",
+      "priority_dimensions_first": [
+        "governance_decision_rights",
+        "measurement_assurance"
+      ],
+      "overall_sort": "priority_rank asc (priority dimensions = 0, others = 1), then severity desc, then dimension_order asc, then question_id asc",
+      "dimension_order": [
+        "governance_decision_rights",
+        "risk_control_posture",
+        "data_readiness",
+        "security_privacy",
+        "talent_operating_model",
+        "third_party_concentration_risk",
+        "measurement_assurance"
+      ]
+    }
+  },
+  "copy": {
+    "headline": "The AI-Readiness Standard",
+    "subtitle": "Seven dimensions. Five levels. One honest picture of where you stand.",
+    "tagline": "A deterministic AI-readiness diagnostic aligned to ISO/IEC 42001 domains and NIST AI RMF functions",
+    "descriptor": "An audit-grade readiness standard aligned to ISO/IEC 42001 domains and NIST AI RMF functions",
+    "thesis": "These standards inform the diagnostic; they do not define the bands.",
+    "advisory_disclaimer": "This is an advisory readiness diagnostic, not a certification. It describes structural readiness against the AI-Readiness Standard; it is not a guarantee that any particular AI deployment will succeed.",
+    "routing_cta": "Close the gaps this diagnostic surfaced: the prioritized remediation list above is the starting point for a readiness engagement.",
+    "verdicts_by_overall_level": {
+      "1": "Ad hoc — establish accountability and a written policy before building.",
+      "2": "Emerging — formalize ownership and name your AI-specific risks.",
+      "3": "Defined — you have the foundations; invest in controls and measurement next.",
+      "4": "Governed — strong footing; tighten assurance and third-party posture.",
+      "5": "Optimized — continuous assurance in place; sustain and audit it."
+    }
+  }
+}

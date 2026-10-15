@@ -4,7 +4,12 @@ Every string (dimension names, ISO/NIST lineage, question prompts, level anchors
 shared copy) is pulled directly from the engine's own data — never paraphrased. The parity
 fixtures are produced by running the engine, so a re-implementation can verify exact parity.
 
-Usage:  python scripts/generate_contract.py contract/
+Usage:  python scripts/generate_contract.py [contract/] [--engine-ref REF]
+
+``engine_commit`` records ``git rev-parse --short HEAD`` by default. When you regenerate the
+contract in the same change that cuts a release, pass the release tag (for example
+``--engine-ref v0.1.1``): HEAD is then the parent commit, and the tag is the ref that will
+name the engine the contract describes.
 The committed contract is verified against the live engine by tests/test_contract_parity.py.
 """
 
@@ -147,7 +152,10 @@ def build_fixtures(commit: str, generated_at: str) -> dict:
         )
     for offset in range(3):
         cases.append(
-            (f"gradient-{offset}", {q.id: Band(((i + offset) % 5) + 1) for i, q in enumerate(QUESTIONS)})
+            (
+                f"gradient-{offset}",
+                {q.id: Band(((i + offset) % 5) + 1) for i, q in enumerate(QUESTIONS)},
+            )
         )
 
     return {
@@ -172,9 +180,17 @@ def _write(path: Path, payload: dict) -> None:
 
 
 def main() -> None:
-    out_dir = Path(sys.argv[1] if len(sys.argv) > 1 else "contract")
+    args = sys.argv[1:]
+    ref: str | None = None
+    if "--engine-ref" in args:
+        i = args.index("--engine-ref")
+        if i + 1 >= len(args):
+            raise SystemExit("--engine-ref needs a value, e.g. --engine-ref v0.1.1")
+        ref = args[i + 1]
+        del args[i : i + 2]
+    out_dir = Path(args[0] if args else "contract")
     out_dir.mkdir(parents=True, exist_ok=True)
-    commit = _engine_commit()
+    commit = ref or _engine_commit()
     generated_at = date.today().isoformat()
     _write(out_dir / "readiness-contract.json", build_contract(commit, generated_at))
     _write(out_dir / "parity-fixtures.json", build_fixtures(commit, generated_at))

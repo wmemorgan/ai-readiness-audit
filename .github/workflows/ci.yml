@@ -25,6 +25,8 @@ jobs:
           python -m pip install -e ".[dev]"
       - name: Lint (ruff)
         run: python -m ruff check .
+      - name: Format (ruff)
+        run: python -m ruff format --check .
       - name: Type-check (mypy)
         run: python -m mypy
       - name: Architecture contract (import-linter)

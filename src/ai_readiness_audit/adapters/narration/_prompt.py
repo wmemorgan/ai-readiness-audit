@@ -13,9 +13,7 @@ def narration_prompt(report: ReadinessReport) -> str:
     dimensions = "\n".join(
         f"- {r.dimension.name}: {r.band.title}" for r in report.dimension_results
     )
-    gaps = "\n".join(
-        f"- {g.dimension_name}: {g.prompt}" for g in report.prioritized_remediation
-    )
+    gaps = "\n".join(f"- {g.dimension_name}: {g.prompt}" for g in report.prioritized_remediation)
     return (
         "Write a concise, plain-language summary of this AI-readiness result for an executive. "
         "Do not invent a score or change any band; narrate only what is given.\n\n"

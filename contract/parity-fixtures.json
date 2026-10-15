@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "engine_commit": "a640ed6",
-  "generated_at": "2026-07-02",
+  "engine_commit": "v0.1.1",
+  "generated_at": "2026-10-15",
   "generated_from": "assess() over the engine — expected values are engine output, not hand-authored",
   "note": "A conformant scorer MUST reproduce per_dimension_levels, overall_level, and ordered_gaps exactly.",
   "cases": [

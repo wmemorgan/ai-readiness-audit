@@ -26,9 +26,7 @@ class ClaudeNarrationProvider:
         try:
             import anthropic  # imported lazily; optional dependency
         except ImportError as exc:  # pragma: no cover - optional path
-            raise RuntimeError(
-                "the 'anthropic' package is required for Claude narration"
-            ) from exc
+            raise RuntimeError("the 'anthropic' package is required for Claude narration") from exc
 
         client = anthropic.Anthropic(api_key=self._api_key)
         message = client.messages.create(

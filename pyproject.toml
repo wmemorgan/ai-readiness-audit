@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ai-readiness-audit"
-version = "0.1.0"
+version = "0.1.1"
 description = "A deterministic AI-readiness diagnostic aligned to ISO/IEC 42001 domains and NIST AI RMF functions"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -70,4 +70,5 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
-pythonpath = ["src"]
+# "." lets the tests import their shared helpers (tests.conftest) under a bare `pytest`.
+pythonpath = ["src", "."]

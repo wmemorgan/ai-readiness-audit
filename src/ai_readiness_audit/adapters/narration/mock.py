@@ -16,7 +16,4 @@ class MockNarrationProvider:
         if not report.prioritized_remediation:
             return lead + " No high-leverage gaps were surfaced."
         top = report.prioritized_remediation[0]
-        return (
-            f"{lead} The highest-priority place to start is "
-            f"{top.dimension_name}: {top.prompt}"
-        )
+        return f"{lead} The highest-priority place to start is {top.dimension_name}: {top.prompt}"

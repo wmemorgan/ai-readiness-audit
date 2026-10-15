@@ -13,6 +13,7 @@ you on a coordinated disclosure.
   documents, which keeps its input surface small.
 - The engine is **policy-neutral**: it makes no data-retention or processing promises and pins no
   provider. Any such policy lives in a deployment, not in this library.
-- The optional narration feature is **bring-your-own-key** and disabled by default; when enabled it
-  sends a finished report summary to the configured provider. Review your provider's terms before
-  enabling it.
+- The CLI never calls an external service. Its optional `--narrate` summary comes from a built-in,
+  deterministic provider. The Claude and OpenAI-compatible narration providers are
+  **bring-your-own-key** library components: when you construct and call one, it sends the finished
+  report (never the raw answers) to that provider. Review your provider's terms before you use one.

@@ -16,8 +16,9 @@ from .mock import MockNarrationProvider
 def build_narration_provider(settings: Settings) -> NarrationProvider | None:
     """Return a narration provider when enabled, else ``None`` (the default).
 
-    The default build wires the deterministic mock provider, which needs no API key. A hosted
-    deployment may substitute a Claude or OpenAI-compatible provider (see the sibling modules).
+    This factory (used by the CLI) always wires the deterministic mock provider, which needs no
+    API key. Library users who want a Claude or OpenAI-compatible provider construct it directly
+    from the sibling modules with their own key.
     """
     if not settings.narration_enabled:
         return None

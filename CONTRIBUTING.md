@@ -14,6 +14,7 @@ Run the full local quality bar — CI runs the same checks:
 
 ```bash
 ruff check .                      # lint
+ruff format --check .             # formatting
 mypy                              # types (strict)
 lint-imports                      # Clean Architecture dependency contract
 pytest                            # tests

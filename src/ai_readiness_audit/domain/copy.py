@@ -17,8 +17,7 @@ TAGLINE = (
     "and NIST AI RMF functions"
 )
 STANDARD_DESCRIPTOR = (
-    "An audit-grade readiness standard aligned to ISO/IEC 42001 domains "
-    "and NIST AI RMF functions"
+    "An audit-grade readiness standard aligned to ISO/IEC 42001 domains and NIST AI RMF functions"
 )
 THESIS = "These standards inform the diagnostic; they do not define the bands."
 
